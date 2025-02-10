@@ -9,13 +9,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             flex-direction: column;
             background: linear-gradient(to bottom, red, pink);
             font-family: Arial, sans-serif;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         body::before {
             content: "";
@@ -34,25 +35,28 @@
         .buttons {
             margin-top: 20px;
             position: relative;
-            width: 100%;
+            width: 300px;
             height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
         button {
             font-size: 20px;
             padding: 10px 20px;
-            margin: 10px;
             border: none;
             cursor: pointer;
             border-radius: 10px;
-            position: absolute;
+            position: relative;
         }
         .yes {
             background-color: lightgreen;
             transition: transform 0.2s;
-            position: relative;
         }
         .no {
             background-color: lightcoral;
+            position: absolute;
         }
         .gif-container {
             display: none;
