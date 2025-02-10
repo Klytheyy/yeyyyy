@@ -95,10 +95,111 @@
             "Last chance to say yes!😖",
             "Sige jud gara kayka ha!😖!😖",
             "Ocakes fine, pag di atin wag pugsin😼"
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            background: linear-gradient(to bottom, red, pink);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .gif-above {
+            margin-bottom: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            position: relative;
+        }
+        .yes {
+            background-color: lightgreen;
+            transition: transform 0.2s;
+        }
+        .no {
+            background-color: lightcoral;
+            position: absolute;
+            transition: transform 0.2s;
+        }
+        .gif-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .warning-text {
+            display: none;
+            color: red;
+            font-size: 18px;
+            position: relative;
+            white-space: nowrap;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <img class="gif-above" src="https://media.tenor.com/_4ZK3YzjmVMAAAAC/peach-goma-love.gif" width="200">
+    <h1 id="valentineText">Will you be my Valentine? ❤️</h1>
+    <p class="warning-text" id="warningText">Are you sure? I'll be very sad 😢</p>
+    <div class="buttons" id="buttonsContainer">
+        <button class="yes" onclick="showGifs()">Yes</button>
+        <button class="no" onmouseover="moveButton()" onclick="swapButtons()">No</button>
+    </div>
+    <div class="gif-container" id="gifContainer">
+        <h2>Yay! See you on Valentine's Day! ❤️</h2>
+        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="200">
+        <img src="https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif" width="200">
+        <img src="https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif" width="200">
+    </div>
+
+    <script>
+        let warningTexts = [
+            "Are you sure? I'll be very sad 😢",
+            "Please don't say no! 💔",
+            "Think about it again! 🥺",
+            "You wouldn't break my heart, right? 😭",
+            "Last chance to say yes! 😖"
         ];
         let warningIndex = 0;
+        let maxWarnings = warningTexts.length;
 
         function moveButton() {
+            if (warningIndex >= maxWarnings) return; // Stop moving after max warnings
+            
             let button = document.querySelector('.no');
             let container = document.getElementById('buttonsContainer');
             let maxWidth = container.clientWidth - button.clientWidth;
@@ -109,18 +210,16 @@
 
             button.style.transform = `translate(${x}px, ${y}px)`;
             
-            if (warningIndex < warningTexts.length) {
-                document.getElementById('warningText').textContent = warningTexts[warningIndex];
-                document.getElementById('warningText').style.display = 'block';
-                warningIndex++;
-            }
+            document.getElementById('warningText').textContent = warningTexts[warningIndex];
+            document.getElementById('warningText').style.display = 'block';
+            warningIndex++;
         }
 
         function swapButtons() {
             let yesButton = document.querySelector('.yes');
             let noButton = document.querySelector('.no');
             
-            if (warningIndex >= warningTexts.length) { // After last message, swap button positions
+            if (warningIndex >= maxWarnings) { // After last message, swap button positions
                 let yesRect = yesButton.getBoundingClientRect();
                 let noRect = noButton.getBoundingClientRect();
                 
