@@ -87,16 +87,33 @@
     </div>
 
    <script>
+        let warningTexts = [
+            "Are you sure? wala ba koy chance?😢",
+            "Please don't say no!💔 sapakin kita eh",
+            "Think about it again bebekoh🥺",
+            "Natatawa ako sa mga memes pero pag namemes kita nalulongkot ako😭",
+            "Last chance to say yes!😖",
+            "Sige jud gara kayka ha!😖!😖"
+        ];
+        let warningIndex = 0;
+
         function moveButton() {
-    let button = document.querySelector('.no');
-    let container = document.getElementById('buttonsContainer');
-    let maxWidth = container.clientWidth - button.clientWidth;
-    let maxHeight = container.clientHeight - button.clientHeight;
+            let button = document.querySelector('.no');
+            let container = document.getElementById('buttonsContainer');
+            let maxWidth = container.clientWidth - button.clientWidth;
+            let maxHeight = container.clientHeight - button.clientHeight;
 
-    let x = Math.random() * maxWidth - maxWidth / 2;
-    let y = Math.random() * maxHeight - maxHeight / 2;
+            let x = Math.random() * maxWidth - maxWidth / 2;
+            let y = Math.random() * maxHeight - maxHeight / 2;
 
-    button.style.transform = `translate(${x}px, ${y}px)`;
+            button.style.transform = `translate(${x}px, ${y}px)`;
+            
+            // Cycle through warning messages
+            let warningText = document.getElementById('warningText');
+            warningText.textContent = warningTexts[warningIndex];
+            warningText.style.display = 'block';
+            
+            warningIndex = (warningIndex + 1) % warningTexts.length;
             
             // Show warning text when clicking 'No'
             document.getElementById('warningText').style.display = 'block';
