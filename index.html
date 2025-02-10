@@ -81,12 +81,12 @@
     </style>
 </head>
 <body>
-    <div id="nameScreen" class="input-container">
+     <div id="nameScreen" class="input-container">
         <h1>Enter your name</h1>
         <input type="text" id="nameInput" placeholder="Your Name">
         <button onclick="startValentine()">Continue</button>
     </div>
-    
+
     <div id="valentineScreen" class="hidden">
     <img class="gif-above" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXR5cDNoZW55N2s1NDJqaTB2YW9zbWE2ZnhzbGU5Y3pqODI1NTljMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0GqFhyNd0Wmfo6sM/giphy.gif" width="200">
     <h1 id="valentineText">Will you be my Valentine, <span id="nameDisplay"></span>? ❤️</h1>
@@ -104,18 +104,15 @@
  </div>
 
    <script>
-       function startValentine() {
-    let name = document.getElementById('nameInput').value;
-    if (name.trim() === "") {
-        alert("Please enter your name!");
-        return;
-    }
-    document.getElementById('nameScreen').style.display = 'none';
-    let valentineScreen = document.getElementById('valentineScreen');
-    valentineScreen.classList.remove('hidden');
-    valentineScreen.style.display = 'block'; // Ensure it appears
-    document.getElementById('nameDisplay').textContent = name;
-}
+        function startValentine() {
+            let name = document.getElementById('nameInput').value;
+            if (name.trim() === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            document.getElementById('nameScreen').style.display = 'none';
+            document.getElementById('valentineScreen').classList.remove('hidden');
+            document.getElementById('nameDisplay').textContent = name;
         }
         let warningTexts = [
             "Are you sure? wala ba koy chance?😢",
@@ -147,7 +144,7 @@
             warningIndex++;
         }
 
-       function swapButtons() {
+        function swapButtons() {
     let yesButton = document.querySelector('.yes');
     let noButton = document.querySelector('.no');
 
@@ -163,11 +160,10 @@
             yesButton.click();
         }, 300);
     }
-}
 
         }
 
-        function showGifs() {
+        function  showGifs() {
             document.getElementById('gifContainer').style.display = 'block';
             document.getElementById('valentineText').style.display = 'none';
             document.getElementById('buttonsContainer').style.display = 'none';
