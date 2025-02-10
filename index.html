@@ -93,7 +93,7 @@
         <p class="warning-text" id="warningText">Are you sure? wala ba koy chance?😢</p>
         <div class="buttons" id="buttonsContainer">
             <button class="yes" onclick="showGifs()">Yes</button>
-            <button class="no" onmouseover="moveButton()" onclick="swapButtons()">No</button>
+            <button class="no" onclick="moveButton()">No</button>
         </div>
         <div class="gif-container" id="gifContainer">
         <h2>Yay! See you on Valentines, pookie❤️</h2>
@@ -129,8 +129,12 @@
         let maxWarnings = warningTexts.length;
 
         function moveButton() {
-            if (warningIndex >= maxWarnings) return; // Stop moving after max warnings
-
+           if (warningIndex < maxWarnings - 1) {
+        moveButton();  // Move the button until the second-to-last warning
+    } else {
+        swapButtons(); // On the last warning, swap instead of moving
+    }
+}
             let button = document.querySelector('.no');
             let container = document.getElementById('buttonsContainer');
             let maxWidth = container.clientWidth - button.clientWidth;
