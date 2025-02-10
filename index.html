@@ -84,7 +84,7 @@
     <div id="nameScreen" class="input-container">
         <h1>Enter your name</h1>
         <input type="text" id="nameInput" placeholder="Your Name">
-        <button onclick="startValentine()">Continue</button>
+       <button id="continueBtn">Continue</button>
     </div>
     
     <div id="valentineScreen" class="hidden">
@@ -110,12 +110,15 @@
         alert("Please enter your name!");
         return;
     }
-    document.getElementById('nameScreen').style.display = 'none';
+    let nameScreen = document.getElementById('nameScreen');
     let valentineScreen = document.getElementById('valentineScreen');
+
+    nameScreen.style.display = 'none'; // Hide name input screen
     valentineScreen.classList.remove('hidden');
-    valentineScreen.style.display = 'block'; // Ensure it appears
+    valentineScreen.style.display = 'flex'; // Ensure it's visible
     document.getElementById('nameDisplay').textContent = name;
 }
+
         }
         let warningTexts = [
             "Are you sure? wala ba koy chance?😢",
