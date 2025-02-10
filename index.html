@@ -105,14 +105,17 @@
 
    <script>
        function startValentine() {
-            let name = document.getElementById('nameInput').value;
-            if (name.trim() === "") {
-                alert("Please enter your name!");
-                return;
-            }
-            document.getElementById('nameScreen').style.display = 'none';
-            document.getElementById('valentineScreen').classList.remove('hidden');
-            document.getElementById('nameDisplay').textContent = name;
+    let name = document.getElementById('nameInput').value;
+    if (name.trim() === "") {
+        alert("Please enter your name!");
+        return;
+    }
+    document.getElementById('nameScreen').style.display = 'none';
+    let valentineScreen = document.getElementById('valentineScreen');
+    valentineScreen.classList.remove('hidden');
+    valentineScreen.style.display = 'block'; // Ensure it appears
+    document.getElementById('nameDisplay').textContent = name;
+}
         }
         let warningTexts = [
             "Are you sure? wala ba koy chance?😢",
