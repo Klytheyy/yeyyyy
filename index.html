@@ -110,32 +110,27 @@
             button.style.transform = `translate(${x}px, ${y}px)`;
             
             if (warningIndex < warningTexts.length) {
-                warningText.textContent = warningTexts[warningIndex];
-                warningText.style.display = 'block';
-                warningText.style.transform = `translate(${x}px, ${y + 30}px)`;
+                document.getElementById('warningText').textContent = warningTexts[warningIndex];
+                document.getElementById('warningText').style.display = 'block';
                 warningIndex++;
             }
-            
-            // Show warning text when clicking 'No'
-            document.getElementById('warningText').style.display = 'block';
-            
-             }
+        }
 
         function swapButtons() {
             let yesButton = document.querySelector('.yes');
             let noButton = document.querySelector('.no');
             
-            if (warningIndex === 0) { // When last message has been shown
-                let yesText = yesButton.innerHTML;
-                let noText = noButton.innerHTML;
-                yesButton.innerHTML = noText;
-                noButton.innerHTML = yesText;
-                yesButton.classList.add('no');
-                noButton.classList.add('yes');
-                yesButton.classList.remove('yes');
-                noButton.classList.remove('no');
-                yesButton.onclick = null;
-                noButton.onclick = showGifs;
+            if (warningIndex >= warningTexts.length) { // After last message, swap button positions
+                let yesRect = yesButton.getBoundingClientRect();
+                let noRect = noButton.getBoundingClientRect();
+                
+                yesButton.style.position = 'absolute';
+                noButton.style.position = 'absolute';
+                
+                yesButton.style.left = `${noRect.left}px`;
+                yesButton.style.top = `${noRect.top}px`;
+                noButton.style.left = `${yesRect.left}px`;
+                noButton.style.top = `${yesRect.top}px`;
             }
         }
 
