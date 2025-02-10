@@ -130,7 +130,7 @@
 
         function moveButton() {
             if (warningIndex >= maxWarnings) return; // Stop moving after max warnings
-            
+
             let button = document.querySelector('.no');
             let container = document.getElementById('buttonsContainer');
             let maxWidth = container.clientWidth - button.clientWidth;
@@ -140,7 +140,7 @@
             let y = Math.random() * maxHeight - maxHeight / 2;
 
             button.style.transform = `translate(${x}px, ${y}px)`;
-            
+
             document.getElementById('warningText').textContent = warningTexts[warningIndex];
             document.getElementById('warningText').style.display = 'block';
             warningIndex++;
