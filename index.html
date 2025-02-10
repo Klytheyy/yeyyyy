@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: lightgreen;
+            transition: transform 0.2s;
+        }
+        .no {
+            background-color: lightcoral;
+            position: absolute;
+        }
+        .gif-container {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div class="buttons">
+        <button class="yes" onclick="showGifs()">Yes</button>
+        <button class="no" onclick="growYesButton()" onmouseover="moveButton()">No</button>
+    </div>
+    <div class="gif-container" id="gifContainer">
+        <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="200">
+        <img src="https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif" width="200">
+        <img src="https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif" width="200">
+    </div>
+
+    <script>
+        function moveButton() {
+            let button = document.querySelector('.no');
+            let x = Math.random() * (window.innerWidth - button.clientWidth);
+            let y = Math.random() * (window.innerHeight - button.clientHeight);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+        function growYesButton() {
+            let yesButton = document.querySelector('.yes');
+            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+            yesButton.style.padding = `${parseFloat(yesButton.style.padding) * 1.5}px`;
+        }
+
+        function showGifs() {
+            document.getElementById('gifContainer').style.display = 'block';
+            alert('Yay! See you sa Valentines ❤️');
+        }
+    </script>
+</body>
+</html>
