@@ -109,12 +109,12 @@
 
             button.style.transform = `translate(${x}px, ${y}px)`;
             
-            // Cycle through warning messages
-            let warningText = document.getElementById('warningText');
-            warningText.textContent = warningTexts[warningIndex];
-            warningText.style.display = 'block';
-            
-            warningIndex = (warningIndex + 1) % warningTexts.length;
+            if (warningIndex < warningTexts.length) {
+                warningText.textContent = warningTexts[warningIndex];
+                warningText.style.display = 'block';
+                warningText.style.transform = `translate(${x}px, ${y + 30}px)`;
+                warningIndex++;
+            }
             
             // Show warning text when clicking 'No'
             document.getElementById('warningText').style.display = 'block';
