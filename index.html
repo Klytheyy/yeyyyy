@@ -17,6 +17,20 @@
             position: relative;
             overflow: hidden;
         }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .gif-above {
+            margin-bottom: 10px;
+        }
         .buttons {
             margin-top: 20px;
             position: relative;
@@ -53,10 +67,10 @@
     </style>
 </head>
 <body>
-    <img src="https://media.tenor.com/1s1uhIMi9B0AAAAC/tkthao219-peach-goma.gif" width="200">
-    <h1>Will you be my Valentine? ❤️</h1>
+    <img class="gif-above" src="https://media.tenor.com/1s1uhIMi9B0AAAAC/tkthao219-peach-goma.gif" width="200">
+    <h1 id="valentineText">Will you be my Valentine? ❤️</h1>
     <p class="warning-text" id="warningText">Are you sure? I'll be very sad 😢</p>
-    <div class="buttons">
+    <div class="buttons" id="buttonsContainer">
         <button class="yes" onclick="showGifs()">Yes</button>
         <button class="no" onmouseover="showWarning()" onmousedown="moveButton()">No</button>
     </div>
@@ -75,6 +89,11 @@
             let y = Math.random() * (container.clientHeight - button.clientHeight);
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
+            
+            // Increase 'Yes' button size
+            let yesButton = document.querySelector('.yes');
+            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
         }
 
         function showWarning() {
@@ -83,6 +102,8 @@
 
         function showGifs() {
             document.getElementById('gifContainer').style.display = 'block';
+            document.getElementById('valentineText').style.display = 'none';
+            document.getElementById('buttonsContainer').style.display = 'none';
         }
     </script>
 </body>
