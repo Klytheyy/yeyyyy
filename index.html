@@ -28,6 +28,15 @@
             background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
             opacity: 0.5;
             z-index: -1;
+            }
+        .hidden {
+            display: none;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
         .gif-above {
             margin-bottom: 10px;
@@ -72,14 +81,20 @@
     </style>
 </head>
 <body>
-    <img class="gif-above" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXR5cDNoZW55N2s1NDJqaTB2YW9zbWE2ZnhzbGU5Y3pqODI1NTljMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0GqFhyNd0Wmfo6sM/giphy.gif" width="200">
-    <h1 id="valentineText">Will you be my Valentine?❤</h1>
-    <p class="warning-text" id="warningText">Are you sure? I'll be very sad😢</p>
-    <div class="buttons" id="buttonsContainer">
-        <button class="yes" onclick="showGifs()">Yes</button>
-        <button class="no" onmouseover="showWarning()" onmousedown="moveButton()">No</button>
+    <div id="nameScreen" class="input-container">
+        <h1>Enter your name</h1>
+        <input type="text" id="nameInput" placeholder="Your Name">
+        <button onclick="startValentine()">Continue</button>
     </div>
-    <div class="gif-container" id="gifContainer">
+    <div id="valentineScreen" class="hidden">
+    <img class="gif-above" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXR5cDNoZW55N2s1NDJqaTB2YW9zbWE2ZnhzbGU5Y3pqODI1NTljMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0GqFhyNd0Wmfo6sM/giphy.gif" width="200">
+    <h1 id="valentineText">Will you be my Valentine, <span id="nameDisplay"></span>? ❤️</h1>
+        <p class="warning-text" id="warningText">Are you sure? wala ba koy chance?😢</p>
+        <div class="buttons" id="buttonsContainer">
+            <button class="yes" onclick="showGifs()">Yes</button>
+            <button class="no" onmouseover="moveButton()" onclick="swapButtons()">No</button>
+        </div>
+        <div class="gif-container" id="gifContainer">
         <h2>Yay! See you on Valentines, pookie❤️</h2>
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjQzbmEweHcxOWFjOXRucXF2M2s5aGk1b3JpMDZoYWJicDdiMmpqOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MeIucAjPKoA120R7sN/giphy.gif" width="200">
         <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJmZ2V2c3IzaTU1NnUzYXUwcjV0bHpwcDBxbWgwaXM1Nng0NXg1cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ifB1v1W3Db0GIW7uTA/giphy.gif" width="200">
@@ -87,6 +102,16 @@
     </div>
 
    <script>
+       function startValentine() {
+            let name = document.getElementById('nameInput').value;
+            if (name.trim() === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            document.getElementById('nameScreen').style.display = 'none';
+            document.getElementById('valentineScreen').classList.remove('hidden');
+            document.getElementById('nameDisplay').textContent = name;
+        }
         let warningTexts = [
             "Are you sure? wala ba koy chance?😢",
             "Please don't say no!💔 sapakin kita eh",
@@ -117,7 +142,7 @@
             warningIndex++;
         }
 
-        function swapButtons() {
+       function swapButtons() {
     let yesButton = document.querySelector('.yes');
     let noButton = document.querySelector('.no');
 
@@ -133,6 +158,8 @@
             yesButton.click();
         }, 300);
     }
+}
+
         }
 
         function showGifs() {
