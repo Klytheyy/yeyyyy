@@ -118,10 +118,24 @@
             // Show warning text when clicking 'No'
             document.getElementById('warningText').style.display = 'block';
             
-            // Increase 'Yes' button size
+             }
+
+        function swapButtons() {
             let yesButton = document.querySelector('.yes');
-            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+            let noButton = document.querySelector('.no');
+            
+            if (warningIndex === 0) { // When last message has been shown
+                let yesText = yesButton.innerHTML;
+                let noText = noButton.innerHTML;
+                yesButton.innerHTML = noText;
+                noButton.innerHTML = yesText;
+                yesButton.classList.add('no');
+                noButton.classList.add('yes');
+                yesButton.classList.remove('yes');
+                noButton.classList.remove('no');
+                yesButton.onclick = null;
+                noButton.onclick = showGifs;
+            }
         }
 
         function showGifs() {
