@@ -153,24 +153,23 @@
             warningIndex++;
         }
 
-       function swapButtons() {
+      function swapButtons() {
     let yesButton = document.querySelector('.yes');
     let noButton = document.querySelector('.no');
 
-    if (warningIndex >= maxWarnings) { // After last warning, swap positions
-        let yesTransform = yesButton.style.transform;
-        let noTransform = noButton.style.transform;
+    // Swap positions
+    let yesTransform = yesButton.style.transform;
+    let noTransform = noButton.style.transform;
 
-        yesButton.style.transform = noTransform;
-        noButton.style.transform = yesTransform;
+    yesButton.style.transform = noTransform;
+    noButton.style.transform = yesTransform;
 
-        // Automatically trigger the Yes button after swapping
-        setTimeout(() => {
-            yesButton.click();
-        }, 300);
+    // Ensure "Yes" gets clicked automatically after swapping
+    setTimeout(() => {
+        yesButton.click();
+    }, 300);
+}
     }
-
-        }
 
         function showGifs() {
             document.getElementById('gifContainer').style.display = 'block';
