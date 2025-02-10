@@ -15,10 +15,13 @@
             font-family: Arial, sans-serif;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
         .buttons {
             margin-top: 20px;
             position: relative;
+            width: 100%;
+            height: 100px;
         }
         button {
             font-size: 20px;
@@ -27,14 +30,15 @@
             border: none;
             cursor: pointer;
             border-radius: 10px;
+            position: absolute;
         }
         .yes {
             background-color: lightgreen;
             transition: transform 0.2s;
+            position: relative;
         }
         .no {
             background-color: lightcoral;
-            position: absolute;
         }
         .gif-container {
             display: none;
@@ -54,7 +58,7 @@
     <p class="warning-text" id="warningText">Are you sure? I'll be very sad 😢</p>
     <div class="buttons">
         <button class="yes" onclick="showGifs()">Yes</button>
-        <button class="no" onmouseover="showWarning(); startMovingButton()">No</button>
+        <button class="no" onmouseover="showWarning()" onmousedown="moveButton()">No</button>
     </div>
     <div class="gif-container" id="gifContainer">
         <h2>Yay! See you on Valentine's Day! ❤️</h2>
@@ -64,14 +68,13 @@
     </div>
 
     <script>
-        function startMovingButton() {
+        function moveButton() {
             let button = document.querySelector('.no');
-            setInterval(() => {
-                let x = Math.random() * (window.innerWidth - button.clientWidth);
-                let y = Math.random() * (window.innerHeight - button.clientHeight);
-                button.style.left = `${x}px`;
-                button.style.top = `${y}px`;
-            }, 500);
+            let container = document.querySelector('.buttons');
+            let x = Math.random() * (container.clientWidth - button.clientWidth);
+            let y = Math.random() * (container.clientHeight - button.clientHeight);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
         }
 
         function showWarning() {
