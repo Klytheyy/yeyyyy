@@ -14,6 +14,7 @@
             background-color: pink;
             font-family: Arial, sans-serif;
             text-align: center;
+            position: relative;
         }
         .buttons {
             margin-top: 20px;
@@ -39,39 +40,46 @@
             display: none;
             margin-top: 20px;
         }
+        .warning-text {
+            display: none;
+            color: red;
+            font-size: 18px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
+    <img src="https://media.tenor.com/1s1uhIMi9B0AAAAC/tkthao219-peach-goma.gif" width="200">
     <h1>Will you be my Valentine? ❤️</h1>
+    <p class="warning-text" id="warningText">Are you sure? I'll be very sad 😢</p>
     <div class="buttons">
         <button class="yes" onclick="showGifs()">Yes</button>
-        <button class="no" onclick="growYesButton()" onmouseover="moveButton()">No</button>
+        <button class="no" onmouseover="showWarning(); startMovingButton()">No</button>
     </div>
     <div class="gif-container" id="gifContainer">
+        <h2>Yay! See you on Valentine's Day! ❤️</h2>
         <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="200">
         <img src="https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif" width="200">
         <img src="https://media.giphy.com/media/jUwpNzg9IcyrK/giphy.gif" width="200">
     </div>
 
     <script>
-        function moveButton() {
+        function startMovingButton() {
             let button = document.querySelector('.no');
-            let x = Math.random() * (window.innerWidth - button.clientWidth);
-            let y = Math.random() * (window.innerHeight - button.clientHeight);
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
+            setInterval(() => {
+                let x = Math.random() * (window.innerWidth - button.clientWidth);
+                let y = Math.random() * (window.innerHeight - button.clientHeight);
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+            }, 500);
         }
 
-        function growYesButton() {
-            let yesButton = document.querySelector('.yes');
-            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = `${currentSize * 1.5}px`;
-            yesButton.style.padding = `${parseFloat(yesButton.style.padding) * 1.5}px`;
+        function showWarning() {
+            document.getElementById('warningText').style.display = 'block';
         }
 
         function showGifs() {
             document.getElementById('gifContainer').style.display = 'block';
-            alert('Yay! See you sa Valentines ❤️');
         }
     </script>
 </body>
