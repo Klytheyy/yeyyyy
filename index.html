@@ -17,6 +17,7 @@
             position: relative;
             overflow-x: hidden;
             overflow-y: auto;
+            transition: background 1s ease;
         }
         body::before {
             content: "";
@@ -36,7 +37,7 @@
             margin-top: 20px;
             position: relative;
             width: 100%;
-            height: 100px;
+            height: 300px;
         }
         button {
             font-size: 20px;
@@ -49,15 +50,17 @@
         }
         .yes {
             background-color: lightgreen;
-            transition: transform 0.2s;
+            transition: transform 0.2s, font-size 0.2s ease;
         }
         .no {
             background-color: lightcoral;
             position: absolute;
+            transition: left 0.3s ease, top 0.3s ease;
         }
         .gif-container {
             display: none;
             margin-top: 20px;
+            text-align: center;
         }
         .warning-text {
             display: none;
@@ -86,25 +89,25 @@
         function moveButton() {
             let button = document.querySelector('.no');
             let container = document.querySelector('.buttons');
-            let x = Math.random() * (container.clientWidth - button.clientWidth);
-            let y = Math.random() * (container.clientHeight - button.clientHeight);
+            let maxX = container.clientWidth - button.clientWidth;
+            let maxY = container.clientHeight - button.clientHeight;
+            let x = Math.random() * maxX;
+            let y = Math.random() * maxY;
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
-            
-            // Show warning text when clicking 'No'
             document.getElementById('warningText').style.display = 'block';
-            
-            // Increase 'Yes' button size
             let yesButton = document.querySelector('.yes');
             let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+            if (currentSize < 100) {
+                yesButton.style.fontSize = `${currentSize * 1.5}px`;
+            }
         }
-
         function showGifs() {
             document.getElementById('gifContainer').style.display = 'block';
             document.getElementById('valentineText').style.display = 'none';
             document.getElementById('buttonsContainer').style.display = 'none';
             document.getElementById('warningText').style.display = 'none';
+            document.body.style.background = "pink";
         }
     </script>
 </body>
