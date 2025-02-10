@@ -117,22 +117,23 @@
             warningIndex++;
         }
 
-        function swapButtons() {
-            let yesButton = document.querySelector('.yes');
-            let noButton = document.querySelector('.no');
-            
-            if (warningIndex >= maxWarnings) { // After last message, swap button positions
-                let yesRect = yesButton.getBoundingClientRect();
-                let noRect = noButton.getBoundingClientRect();
-                
-                yesButton.style.position = 'absolute';
-                noButton.style.position = 'absolute';
-                
-                yesButton.style.left = `${noRect.left}px`;
-                yesButton.style.top = `${noRect.top}px`;
-                noButton.style.left = `${yesRect.left}px`;
-                noButton.style.top = `${yesRect.top}px`;
-            }
+       function swapButtons() {
+    let yesButton = document.querySelector('.yes');
+    let noButton = document.querySelector('.no');
+
+    if (warningIndex >= maxWarnings) { // After last warning, swap positions
+        let yesTransform = yesButton.style.transform;
+        let noTransform = noButton.style.transform;
+
+        yesButton.style.transform = noTransform;
+        noButton.style.transform = yesTransform;
+
+        // Automatically trigger the Yes button after swapping
+        setTimeout(() => {
+            yesButton.click();
+        }, 300);
+    }
+
         }
 
         function showGifs() {
