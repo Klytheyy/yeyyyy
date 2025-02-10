@@ -78,10 +78,10 @@
         <h2>Yay! See you on Valentines, pookie❤️</h2>
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjQzbmEweHcxOWFjOXRucXF2M2s5aGk1b3JpMDZoYWJicDdiMmpqOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MeIucAjPKoA120R7sN/giphy.gif" width="200">
         <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJmZ2V2c3IzaTU1NnUzYXUwcjV0bHpwcDBxbWgwaXM1Nng0NXg1cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ifB1v1W3Db0GIW7uTA/giphy.gif" width="200">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjcyNzF6ZDNiYnR3Mm1qMmU0aGY4YjU1aXJ5cGJlbW9hbjdvbTF3aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/OfkGZ5H2H3f8Y/giphy.gif" width="200">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWUxNHpxNmM5aWNoMW10c21ienltMmlodnlyYnB4Ymw0OXgwcDZ2eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L0O3TQpp0WnSXmxV8p/giphy.gif" width="200">
     </div>
 
-    <script>
+   <script>
         function moveButton() {
             let button = document.querySelector('.no');
             let container = document.querySelector('.buttons');
@@ -90,14 +90,13 @@
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
             
+            // Show warning text when clicking 'No'
+            document.getElementById('warningText').style.display = 'block';
+            
             // Increase 'Yes' button size
             let yesButton = document.querySelector('.yes');
             let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
             yesButton.style.fontSize = `${currentSize * 1.5}px`;
-        }
-
-        function showWarning() {
-            document.getElementById('warningText').style.display = 'block';
         }
 
         function showGifs() {
