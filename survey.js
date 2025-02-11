@@ -86,7 +86,8 @@ function showMultipleChoiceQuestion(questionObj, index) {
 
         let submitButton = document.createElement("button");
         submitButton.textContent = "Proceed";
-        submitButton.disabled = true;
+        submitButton.disabled = true;  // Initially disabled
+        submitButton.id = "submitButton";
         submitButton.onclick = () => {
             if (selectedLoveLanguages.length < questionObj.minSelection) {
                 alert("Please select at least one.");
@@ -94,9 +95,26 @@ function showMultipleChoiceQuestion(questionObj, index) {
             }
             showNextQuestion(index + 1);
         };
-        submitButton.id = "submitButton";
         answerButtons.appendChild(submitButton);
     });
+}
+
+function toggleSelection(option) {
+    let index = selectedLoveLanguages.indexOf(option);
+
+    if (index === -1) {
+        selectedLoveLanguages.push(option); // Add to selection
+    } else {
+        selectedLoveLanguages.splice(index, 1); // Remove from selection
+    }
+
+    // Enable or disable proceed button based on the selection
+    let proceedButton = document.getElementById('submitButton');
+    if (selectedLoveLanguages.length >= 1) {
+        proceedButton.disabled = false;
+    } else {
+        proceedButton.disabled = true;
+    }
 }
 
 function displayQuestionWithResponse(questionObj, index) {
@@ -113,16 +131,10 @@ function displayQuestionWithResponse(questionObj, index) {
             button.textContent = option;
             button.onclick = () => {
                 answers[index] = option;
-                answerButtons.innerHTML = ""; 
+                answerButtons.innerHTML = ""; // Clear buttons
                 questionText.style.display = 'none'; // Hide the question text after a choice is made
                 showResponseText(option, () => {
-                    if (option === "Pick-Up Line") {
-                        showPickupLine();  // Handle the Pick-Up Line case
-                    } else if (option === "Kiss") {
-                        showNextQuestion(index + 1); // Show the next question for "Kiss" case
-                    } else {
-                        showNextQuestion(index + 1); // Otherwise, just proceed as usual
-                    }
+                    showNextQuestion(index + 1); // Proceed to the next question
                 });
             };
             answerButtons.appendChild(button);
@@ -172,6 +184,13 @@ function showPickupLine() {
         answerButtons.appendChild(whyBtn);
         answerButtons.appendChild(porQueBtn);
     });
+}
+
+function createButton(text, callback) {
+    let button = document.createElement("button");
+    button.textContent = text;
+    button.onclick = callback;
+    return button;
 }
 
 function finalPickupLine(response) {
