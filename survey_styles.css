@@ -67,13 +67,16 @@ button:hover {
 }
 #slantedText {
     position: absolute;
-    top: 10px;
-    left: 20px;
+    top: 10p#slantedText {
+    position: absolute;
+    top: 15px;
+    left: 30px;
     font-size: 1.2em;
     font-style: italic;
     transform: rotate(-30deg);
     color: #d32f2f;
     font-weight: bold;
+    max-width: 300px;
 }
 #questionText {
     font-size: 1.5em;
@@ -83,4 +86,13 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+}
+.checkbox-container input {
+    transform: scale(1.3);
 }
