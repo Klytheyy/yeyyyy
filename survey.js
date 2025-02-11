@@ -9,7 +9,7 @@ let surveyQuestions = [
 
 let answers = {};
 let currentQuestionIndex = 0;
-let typingSpeed = 125; // 0.25s per letter
+let typingSpeed = 110; // 0.10s per letter
 
 function typeText(element, text, callback) {
     element.textContent = ""; 
@@ -115,13 +115,21 @@ function showPickupLine() {
     });
 }
 
-function finalPickupLine(response) {
+function finalPickupLine(message) {
     let questionText = document.getElementById('questionText');
     let answerButtons = document.getElementById('answerButtons');
+    
+    questionText.innerHTML = ""; 
     answerButtons.innerHTML = ""; 
 
-    typeText(questionText, response);
+    typeText(questionText, message, () => {
+        let proceedBtn = document.createElement("button");
+        proceedBtn.textContent = "Proceed";
+        proceedBtn.onclick = () => {
+            window.location.href = "valentine_gifs.html"; // Redirect to the GIF page
+        };
+        answerButtons.appendChild(proceedBtn);
+    });
 }
-
 // Start survey
 showNextQuestion(0);
