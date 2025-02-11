@@ -122,7 +122,7 @@ button:hover {
     <h1 id="valentineText">Will you be my Valentine, <span id="nameDisplay"></span>? ❤️</h1>
         <p class="warning-text" id="warningText">Are you sure? wala ba koy chance?😢</p>
         <div class="buttons" id="buttonsContainer">
-            <button class="yes" onclick="showNextQuestion()">Yes</button>
+            <button class="yes" onclick="startSurvey()">Yes</button>
             <button class="no" onclick="handleNoClick()">No</button>
         </div>
         <div id="surveyScreens" class="hidden">
@@ -204,7 +204,14 @@ button:hover {
         yesButton.click();
     }, 300);
 }
-       let surveyQuestions = [
+    
+    function startSurvey() {
+    document.getElementById('valentineScreen').classList.add('hidden');
+    document.getElementById('surveyScreen').classList.remove('hidden');
+    currentQuestionIndex = 0; 
+    showNextQuestion(currentQuestionIndex);
+}
+let surveyQuestions = [
     { text: "Which language do you prefer:", options: ["Physical Touch", "Words of Affirmation", "Quality Time", "Receiving Gifts", "Acts of Service"] },
     { text: "Preferred Physical Affection:", options: ["Hugs", "Holding Hands", "Cuddle", "Kiss"] },
     { text: "If Kiss, Where?", options: ["Lips", "Cheeks", "Forehead"], condition: "Kiss" },
@@ -255,7 +262,6 @@ function showNextQuestion(index) {
             document.getElementById('warningText').style.display = 'none';
             document.body.style.background = "pink";
         }
-       
 
     </script>
 </body>
