@@ -99,16 +99,6 @@ function showMultipleChoiceQuestion(questionObj, index) {
     });
 }
 
-function toggleSelection(option) {
-    let index = selectedLoveLanguages.indexOf(option);
-    if (index === -1) {
-        selectedLoveLanguages.push(option);
-    } else {
-        selectedLoveLanguages.splice(index, 1);
-    }
-    document.getElementById("submitButton").disabled = selectedLoveLanguages.length < 1;
-}
-
 function displayQuestionWithResponse(questionObj, index) {
     let questionText = document.getElementById('questionText');
     let answerButtons = document.getElementById('answerButtons');
@@ -124,7 +114,15 @@ function displayQuestionWithResponse(questionObj, index) {
             button.onclick = () => {
                 answers[index] = option;
                 answerButtons.innerHTML = ""; 
-                showResponseText(option, () => showNextQuestion(index + 1));
+                showResponseText(option, () => {
+                    if (option === "Pick-Up Line") {
+                        showPickupLine();  // Handle the Pick-Up Line case
+                    } else if (option === "Kiss") {
+                        showNextQuestion(index + 1); // Show the next question for "Kiss" case
+                    } else {
+                        showNextQuestion(index + 1); // Otherwise, just proceed as usual
+                    }
+                });
             };
             answerButtons.appendChild(button);
         });
@@ -173,6 +171,13 @@ function showPickupLine() {
         answerButtons.appendChild(whyBtn);
         answerButtons.appendChild(porQueBtn);
     });
+}
+
+function finalPickupLine(response) {
+    let questionText = document.getElementById('questionText');
+    let responseText = document.getElementById('responseText');
+    questionText.innerHTML = response;
+    responseText.innerHTML = "Aww, I love it! 😍";
 }
 
 showNextQuestion(0);
