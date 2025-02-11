@@ -22,19 +22,20 @@ body::before {
 
 .survey-container {
     background: white;
-    padding: 40px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 600px; /* Prevents it from being too wide */
-    min-height: 300px; /* Ensures enough space */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 40%; /* Set initial width to be smaller */
+    min-width: 250px; /* Minimum width to ensure it's not too small */
+    max-width: 600px; /* Limit the maximum width */
+    height: auto; /* Allow the container to grow in height */
+    max-height: 90vh; /* Limit the height of the container */
+    overflow-y: auto; /* Enable scrolling if the content overflows */
+    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     text-align: center;
+    transition: height 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transition for resizing */
 }
 
 h1 {
