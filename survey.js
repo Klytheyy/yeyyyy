@@ -1,3 +1,4 @@
+console.log("Script is running");
 let surveyQuestions = [
     { 
         text: "Which love language do you prefer?", 
