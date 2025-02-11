@@ -3,180 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-            background: linear-gradient(to bottom, red, pink);
-            font-family: Arial, sans-serif;
-            text-align: center;
-            position: relative;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
-            opacity: 0.5;
-            z-index: -1;
-            }
-        .hidden {
-            display: none;
-        }
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        .gif-above {
-            margin-bottom: 10px;
-         }
-        .buttons {
-            margin-top: 20px;
-            position: relative;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 80px;
-        }
-        button {
-            font-size: 20px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            position: relative;
-        }
-        .yes {
-            background-color: lightgreen;
-            transition: transform 0.2s;
-        }
-        .no {
-            background-color: lightcoral;
-            position: relative;
-            transition: transform 0.2s;
-        }
-        .gif-container {
-            display: none;
-            margin-top: 20px;
-        }
-        .warning-text {
-            display: none;
-            color: red;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-    </style>
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="nameScreen" class="input-container">
-        <h1>Enter your name</h1>
-        <input type="text" id="nameInput" placeholder="Your Name">
-       <button id="continueBtn">Continue</button>
-    </div>
-    
-    <div id="valentineScreen" class="hidden">
-    <img class="gif-above" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXR5cDNoZW55N2s1NDJqaTB2YW9zbWE2ZnhzbGU5Y3pqODI1NTljMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0GqFhyNd0Wmfo6sM/giphy.gif" width="200">
-    <h1 id="valentineText">Will you be my Valentine, <span id="nameDisplay"></span>? ❤️</h1>
-        <p class="warning-text" id="warningText">Are you sure? wala ba koy chance?😢</p>
-        <div class="buttons" id="buttonsContainer">
-            <button class="yes" onclick="showGifs()">Yes</button>
-            <button class="no" onmouseover="moveButton()" onclick="swapButtons()">No</button>
+    <div class="container">
+        <h1>Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button class="yes-button" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" onclick="handleNoClick()">No</button>
         </div>
-        <div class="gif-container" id="gifContainer">
-        <h2>Yay! See you on Valentines, pookie❤️</h2>
-        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjQzbmEweHcxOWFjOXRucXF2M2s5aGk1b3JpMDZoYWJicDdiMmpqOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MeIucAjPKoA120R7sN/giphy.gif" width="200">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJmZ2V2c3IzaTU1NnUzYXUwcjV0bHpwcDBxbWgwaXM1Nng0NXg1cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ifB1v1W3Db0GIW7uTA/giphy.gif" width="200">
-        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzl4bjVicWJqZWI1bjgyMnprb2QxNHVoNTBiNHkzOTl2OTUyMjBxMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o75ajIFH0QnQC3nCeD/giphy.gif" width="200">
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+        </div>
     </div>
- </div>
-
-   <script>
-       function startValentine() {
-    let name = document.getElementById('nameInput').value;
-    if (name.trim() === "") {
-        alert("Please enter your name!");
-        return;
-    }
-    let nameScreen = document.getElementById('nameScreen');
-    let valentineScreen = document.getElementById('valentineScreen');
-
-    nameScreen.style.display = 'none'; // Hide name input screen
-    valentineScreen.classList.remove('hidden');
-    valentineScreen.style.display = 'flex'; // Ensure it's visible
-    document.getElementById('nameDisplay').textContent = name;
-}
-
-        }
-        let warningTexts = [
-            "Are you sure? wala ba koy chance?😢",
-            "Please don't say no!💔 sapakin kita eh",
-            "Think about it again bebekoh🥺",
-            "Natatawa ako sa mga memes pero pag namemes kita nalulongkot ako😭",
-            "Last chance to say yes!😖",
-            "Sige jud gara kayka ha!😖!😖",
-            "Ocakes fine, pag di atin wag pugsin😼"
-        ];
-        let warningIndex = 0;
-        let maxWarnings = warningTexts.length;
-
-        function moveButton() {
-            if (warningIndex >= maxWarnings) return; // Stop moving after max warnings
-            
-            let button = document.querySelector('.no');
-            let container = document.getElementById('buttonsContainer');
-            let maxWidth = container.clientWidth - button.clientWidth;
-            let maxHeight = container.clientHeight - button.clientHeight;
-
-            let x = Math.random() * maxWidth - maxWidth / 2;
-            let y = Math.random() * maxHeight - maxHeight / 2;
-
-            button.style.transform = `translate(${x}px, ${y}px)`;
-            
-            document.getElementById('warningText').textContent = warningTexts[warningIndex];
-            document.getElementById('warningText').style.display = 'block';
-            warningIndex++;
-        }
-
-       function swapButtons() {
-    let yesButton = document.querySelector('.yes');
-    let noButton = document.querySelector('.no');
-
-    if (warningIndex >= maxWarnings) { // After last warning, swap positions
-        let yesTransform = yesButton.style.transform;
-        let noTransform = noButton.style.transform;
-
-        yesButton.style.transform = noTransform;
-        noButton.style.transform = yesTransform;
-
-        // Automatically trigger the Yes button after swapping
-        setTimeout(() => {
-            yesButton.click();
-        }, 300);
-    }
-}
-
-        }
-
-        function showGifs() {
-            document.getElementById('gifContainer').style.display = 'block';
-            document.getElementById('valentineText').style.display = 'none';
-            document.getElementById('buttonsContainer').style.display = 'none';
-            document.getElementById('warningText').style.display = 'none';
-            document.body.style.background = "pink";
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
