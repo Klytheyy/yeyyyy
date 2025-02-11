@@ -207,7 +207,8 @@ button:hover {
     
     function startSurvey() {
     document.getElementById('valentineScreen').classList.add('hidden');
-    document.getElementById('surveyScreen').classList.remove('hidden');
+    document.getElementById('surveyScreens').classList.remove('hidden');
+    showGifs();
     currentQuestionIndex = 0; 
     showNextQuestion(currentQuestionIndex);
 }
@@ -232,7 +233,7 @@ function showNextQuestion(index) {
     let questionObj = surveyQuestions[index];
 
     // Skip conditional question if condition isn't met
-    if (questionObj.condition && answers[2] !== questionObj.condition) {
+    if (questionObj.condition && answers[currentQuestionIndex - 1] !== questionObj.condition) {
         showNextQuestion(index + 1);
         return;
     }
