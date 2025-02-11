@@ -205,13 +205,6 @@ button:hover {
         yesButton.click();
     }, 300);
 }
-        function showGifs() {
-            document.getElementById('gifContainer').style.display = 'block';
-            document.getElementById('valentineText').style.display = 'none';
-            document.getElementById('buttonsContainer').style.display = 'none';
-            document.getElementById('warningText').style.display = 'none';
-            document.body.style.background = "pink";
-        }
        let surveyQuestions = [
     { text: "Which language do you prefer:", options: ["Physical Touch", "Words of Affirmation", "Quality Time", "Receiving Gifts", "Acts of Service"] },
     { text: "Preferred Physical Affection:", options: ["Hugs", "Holding Hands", "Cuddle", "Kiss"] },
@@ -256,6 +249,14 @@ function showNextQuestion(index) {
         answerButtons.appendChild(button);
     });
 }
+        function showGifs() {
+            document.getElementById('gifContainer').style.display = 'block';
+            document.getElementById('valentineText').style.display = 'none';
+            document.getElementById('buttonsContainer').style.display = 'none';
+            document.getElementById('warningText').style.display = 'none';
+            document.body.style.background = "pink";
+        }
+       
 
     </script>
 </body>
