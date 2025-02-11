@@ -8,7 +8,7 @@ let surveyQuestions = [
     { text: "Preferred Physical Affection:", options: ["Hugs", "Holding Hands", "Cuddle", "Kiss"], condition: "Physical Touch" },
     { text: "If Kiss, Where?", options: ["Lips", "Cheeks", "Forehead"], condition: "Kiss" },
     { text: "Would you like to hear a", options: ["Deep Talk", "Pick-Up Line"], condition: "Words of Affirmation" },
-    { text: "Where do we go after?", options: ["Late Night Walk", "Daylight Stroll"], condition: "Quality Time" },
+    { text: "Ooh, what's a good thing to spend together?", options: ["Late Night Walk", "Daylight Stroll"], condition: "Quality Time" },
     { text: "Do you prefer Flowers, Chocolates, or Something Else?", options: ["Flowers", "Chocolates", "Something Else"], condition: "Receiving Gifts" },
     { text: "How can I show my love through acts of service?", options: ["Let me take care of you", "I'll always be there for you"], condition: "Acts of Service" },
     { text: "Where should we go for our date?", options: ["Coffee Date", "Picnic Date", "Sunset Date", "Museum Date", "Cinema Date"] }
@@ -64,11 +64,21 @@ function showMultipleChoiceQuestion(questionObj, index) {
 
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
-            let button = document.createElement("button");
-            button.textContent = option;
-            button.onclick = () => toggleSelection(button, option);
-            button.classList.add("multi-select");
-            answerButtons.appendChild(button);
+            let label = document.createElement("label");
+            label.classList.add("checkbox-container");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = option;
+            checkbox.onclick = () => toggleSelection(option);
+            
+            let checkmark = document.createElement("span");
+            checkmark.classList.add("checkmark");
+
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(option));
+            label.appendChild(checkmark);
+            answerButtons.appendChild(label);
         });
 
         let submitButton = document.createElement("button");
@@ -86,14 +96,12 @@ function showMultipleChoiceQuestion(questionObj, index) {
     });
 }
 
-function toggleSelection(button, option) {
+function toggleSelection(option) {
     let index = selectedLoveLanguages.indexOf(option);
     if (index === -1) {
         selectedLoveLanguages.push(option);
-        button.classList.add("selected");
     } else {
         selectedLoveLanguages.splice(index, 1);
-        button.classList.remove("selected");
     }
     document.getElementById("submitButton").disabled = selectedLoveLanguages.length < 1;
 }
@@ -101,7 +109,10 @@ function toggleSelection(button, option) {
 function displayQuestionWithResponse(questionObj, index) {
     let questionText = document.getElementById('questionText');
     let answerButtons = document.getElementById('answerButtons');
+    let responseText = document.getElementById('responseText');
+
     answerButtons.innerHTML = "";
+    responseText.innerHTML = "";
 
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
@@ -109,14 +120,8 @@ function displayQuestionWithResponse(questionObj, index) {
             button.textContent = option;
             button.onclick = () => {
                 answers[index] = option;
-                
-                if (option === "Pick-Up Line") {
-                    showPickupLine();
-                } else if (option === "Deep Talk") {
-                    showDeepTalk();
-                } else {
-                    showResponseText(option, () => showNextQuestion(index + 1));
-                }
+                answerButtons.innerHTML = ""; 
+                showResponseText(option, () => showNextQuestion(index + 1));
             };
             answerButtons.appendChild(button);
         });
@@ -143,9 +148,8 @@ function showResponseText(option, callback) {
         "I'll always be there for you": "No matter what happens, I'll always have your back."
     };
 
-    responseText.textContent = "";
     typeText(responseText, responseMessages[option] || "Great choice!", () => {
-        setTimeout(callback, 1000);
+        setTimeout(callback, 1500);
     });
 }
 
@@ -165,17 +169,6 @@ function showPickupLine() {
         answerButtons.appendChild(bakitBtn);
         answerButtons.appendChild(whyBtn);
         answerButtons.appendChild(porQueBtn);
-    });
-}
-
-function showDeepTalk() {
-    let questionText = document.getElementById('questionText');
-    let answerButtons = document.getElementById('answerButtons');
-    answerButtons.innerHTML = "";
-
-    let deepTalkMessage = "Wow, to start. Love starts as a feeling, but to continue is a choice, and I find myself choosing you more and more every day.";
-    typeText(questionText, deepTalkMessage, () => {
-        setTimeout(() => showNextQuestion(surveyQuestions.length - 1), 2000);
     });
 }
 
