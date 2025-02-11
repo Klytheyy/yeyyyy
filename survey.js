@@ -60,22 +60,19 @@ function showNextQuestion(index) {
 function showMultipleChoiceQuestion(questionObj, index) {
     let questionText = document.getElementById('questionText');
     let answerButtons = document.getElementById('answerButtons');
-    let sideText = document.getElementById('sideText');
     answerButtons.innerHTML = "";
-    sideText.innerHTML = "";
 
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
-            // Create a unique ID by replacing spaces with hyphens and converting to lowercase
             let optionId = option.replace(/\s+/g, "-").toLowerCase();
 
             let label = document.createElement("label");
-            label.setAttribute("for", optionId); // Match the 'for' attribute with the checkbox ID
+            label.setAttribute("for", optionId);
 
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.value = option;
-            checkbox.id = optionId; // Ensure the ID matches the 'for' attribute
+            checkbox.id = optionId;
             checkbox.onclick = () => toggleSelection(option);
 
             let checkmark = document.createElement("span");
@@ -95,11 +92,7 @@ function showMultipleChoiceQuestion(questionObj, index) {
                 alert("Please select at least one.");
                 return;
             }
-
-            // Update the side text when love languages are chosen
-            let text = `Since you chose ${selectedLoveLanguages.join(", ")}, let's make this special!`;
-            sideText.style.transform = "rotate(-30deg)";
-            typeText(sideText, text, () => showNextQuestion(index + 1));
+            showNextQuestion(index + 1);
         };
         submitButton.id = "submitButton";
         answerButtons.appendChild(submitButton);
