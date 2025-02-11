@@ -66,14 +66,16 @@ function showMultipleChoiceQuestion(questionObj, index) {
 
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
+            // Create a unique ID by replacing spaces with hyphens and converting to lowercase
+            let optionId = option.replace(/\s+/g, "-").toLowerCase();
+
             let label = document.createElement("label");
-            label.classList.add("checkbox-container");
-            label.setAttribute("for", option.replace(/\s+/g, "-").toLowerCase()); // Creates unique 'for' attribute
+            label.setAttribute("for", optionId); // Match the 'for' attribute with the checkbox ID
 
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.value = option;
-            checkbox.id = option.replace(/\s+/g, "-").toLowerCase(); // Matches the 'for' attribute
+            checkbox.id = optionId; // Ensure the ID matches the 'for' attribute
             checkbox.onclick = () => toggleSelection(option);
 
             let checkmark = document.createElement("span");
