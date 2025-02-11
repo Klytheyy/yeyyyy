@@ -122,20 +122,19 @@ button:hover {
     <h1 id="valentineText">Will you be my Valentine, <span id="nameDisplay"></span>? ❤️</h1>
         <p class="warning-text" id="warningText">Are you sure? wala ba koy chance?😢</p>
         <div class="buttons" id="buttonsContainer">
-            <button class="yes" onclick="showGifs()">Yes</button>
+            <button class="yes" onclick="showNextQuestion()">Yes</button>
             <button class="no" onclick="handleNoClick()">No</button>
         </div>
+        <div id="surveyScreens" class="hidden">
+    <h2 id="questionText"></h2>
+    <div class="button-container" id="answerButtons"></div>
+</div>
         <div class="gif-container" id="gifContainer">
         <h2>Yay! See you on Valentines, pookie❤️</h2>
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjQzbmEweHcxOWFjOXRucXF2M2s5aGk1b3JpMDZoYWJicDdiMmpqOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MeIucAjPKoA120R7sN/giphy.gif" width="200">
         <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJmZ2V2c3IzaTU1NnUzYXUwcjV0bHpwcDBxbWgwaXM1Nng0NXg1cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ifB1v1W3Db0GIW7uTA/giphy.gif" width="200">
         <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzl4bjVicWJqZWI1bjgyMnprb2QxNHVoNTBiNHkzOTl2OTUyMjBxMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/o75ajIFH0QnQC3nCeD/giphy.gif" width="200">
     </div>
-      
-<div id="surveyScreens" class="hidden">
-    <h2 id="questionText"></h2>
-    <div class="button-container" id="answerButtons"></div>
-</div>
 
  </div>
 
@@ -210,7 +209,7 @@ button:hover {
     { text: "Preferred Physical Affection:", options: ["Hugs", "Holding Hands", "Cuddle", "Kiss"] },
     { text: "If Kiss, Where?", options: ["Lips", "Cheeks", "Forehead"], condition: "Kiss" },
     { text: "Where should we go?", options: ["Coffee Date", "Picnic Date", "Sunset Date", "Museum Date", "Cinema Date"] },
-    { text: "Where do we go after?", options: ["Late Night Walk", "Daylight Strolling"] },
+    { text: "Where do we go after?", options: ["Late Night Walk", "Daylight Stroll"] },
     { text: "Would you like to hear a", options: ["Deep Talk", "Pick-Up Line"] }
 ];
 
