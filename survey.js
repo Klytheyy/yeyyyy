@@ -114,6 +114,7 @@ function displayQuestionWithResponse(questionObj, index) {
             button.onclick = () => {
                 answers[index] = option;
                 answerButtons.innerHTML = ""; 
+                questionText.style.display = 'none'; // Hide the question text after a choice is made
                 showResponseText(option, () => {
                     if (option === "Pick-Up Line") {
                         showPickupLine();  // Handle the Pick-Up Line case
