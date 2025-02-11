@@ -66,13 +66,14 @@ function showMultipleChoiceQuestion(questionObj, index) {
         questionObj.options.forEach(option => {
             let button = document.createElement("button");
             button.textContent = option;
-            button.onclick = () => toggleSelection(option);
+            button.onclick = () => toggleSelection(button, option);
             button.classList.add("multi-select");
             answerButtons.appendChild(button);
         });
 
         let submitButton = document.createElement("button");
         submitButton.textContent = "Proceed";
+        submitButton.disabled = true;
         submitButton.onclick = () => {
             if (selectedLoveLanguages.length < questionObj.minSelection) {
                 alert("Please select at least one.");
@@ -80,17 +81,21 @@ function showMultipleChoiceQuestion(questionObj, index) {
             }
             showNextQuestion(index + 1);
         };
+        submitButton.id = "submitButton";
         answerButtons.appendChild(submitButton);
     });
 }
 
-function toggleSelection(option) {
+function toggleSelection(button, option) {
     let index = selectedLoveLanguages.indexOf(option);
     if (index === -1) {
         selectedLoveLanguages.push(option);
+        button.classList.add("selected");
     } else {
         selectedLoveLanguages.splice(index, 1);
+        button.classList.remove("selected");
     }
+    document.getElementById("submitButton").disabled = selectedLoveLanguages.length < 1;
 }
 
 function displayQuestionWithResponse(questionObj, index) {
