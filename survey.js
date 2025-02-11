@@ -68,12 +68,14 @@ function showMultipleChoiceQuestion(questionObj, index) {
         questionObj.options.forEach(option => {
             let label = document.createElement("label");
             label.classList.add("checkbox-container");
+            label.setAttribute("for", option.replace(/\s+/g, "-").toLowerCase()); // Creates unique 'for' attribute
 
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.value = option;
+            checkbox.id = option.replace(/\s+/g, "-").toLowerCase(); // Matches the 'for' attribute
             checkbox.onclick = () => toggleSelection(option);
-            
+
             let checkmark = document.createElement("span");
             checkmark.classList.add("checkmark");
 
