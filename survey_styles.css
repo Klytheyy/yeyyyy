@@ -72,17 +72,6 @@ button:hover {
     max-width: 300px;
     border-radius: 10px;
 }
-#slantedText {
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    font-size: 1.2em;
-    font-style: italic;
-    transform: rotate(-30deg);
-    color: #d32f2f;
-    font-weight: bold;
-    max-width: 300px;
-}
 #questionText {
     font-size: 1.5em;
     margin-bottom: 15px;
