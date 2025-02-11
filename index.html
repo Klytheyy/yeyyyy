@@ -78,36 +78,30 @@
             font-size: 18px;
             margin-top: 10px;
         }
-        .hidden {
-    display: none;
-}
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-.question-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-button {
-    font-size: 20px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: lightblue;
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: deepskyblue;
-}
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: lightblue;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: deepskyblue;
+        }
     </style>
 </head>
 <body>
@@ -125,10 +119,12 @@ button:hover {
             <button class="yes" onclick="startSurvey()">Yes</button>
             <button class="no" onclick="handleNoClick()">No</button>
         </div>
+        
         <div id="surveyScreens" class="hidden">
-    <h2 id="questionText"></h2>
-    <div class="button-container" id="answerButtons"></div>
-</div>
+            <h2 id="questionText"></h2>
+            <div class="button-container" id="answerButtons"></div>
+            </div>
+        
         <div class="gif-container" id="gifContainer">
         <h2>Yay! See you on Valentines, pookie❤️</h2>
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjQzbmEweHcxOWFjOXRucXF2M2s5aGk1b3JpMDZoYWJicDdiMmpqOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MeIucAjPKoA120R7sN/giphy.gif" width="200">
@@ -189,43 +185,46 @@ button:hover {
         }
 
       function swapButtons() {
-    let yesButton = document.querySelector('.yes');
-    let noButton = document.querySelector('.no');
+        let yesButton = document.querySelector('.yes');
+        let noButton = document.querySelector('.no');
 
     // Swap positions
-    let yesTransform = yesButton.style.transform;
-    let noTransform = noButton.style.transform;
+        let yesTransform = yesButton.style.transform;
+        let noTransform = noButton.style.transform;
 
-    yesButton.style.transform = noTransform;
-    noButton.style.transform = yesTransform;
+        yesButton.style.transform = noTransform;
+        noButton.style.transform = yesTransform;
 
     // Ensure "Yes" gets clicked automatically after swapping
-    setTimeout(() => {
-        yesButton.click();
-    }, 300);
-}
+        setTimeout(() => {
+            yesButton.click();
+        }, 300);
+        }
     
     function startSurvey() {
-    document.getElementById('valentineScreen').classList.add('hidden');
-    document.getElementById('surveyScreens').classList.remove('hidden');
-    showGifs();
-    currentQuestionIndex = 0; 
-    showNextQuestion(currentQuestionIndex);
+        document.getElementById('valentineScreen').style.display = 'none'; // Hide valentine screen
+        let surveyScreen = document.getElementById('surveyScreens');
+        surveyScreen.style.visibility = 'visible'; // Show survey
+        surveyScreen.style.display = 'block';
+    
+        currentQuestionIndex = 0;
+        showNextQuestion(currentQuestionIndex);
 }
-let surveyQuestions = [
-    { text: "Which language do you prefer:", options: ["Physical Touch", "Words of Affirmation", "Quality Time", "Receiving Gifts", "Acts of Service"] },
-    { text: "Preferred Physical Affection:", options: ["Hugs", "Holding Hands", "Cuddle", "Kiss"] },
-    { text: "If Kiss, Where?", options: ["Lips", "Cheeks", "Forehead"], condition: "Kiss" },
-    { text: "Where should we go?", options: ["Coffee Date", "Picnic Date", "Sunset Date", "Museum Date", "Cinema Date"] },
-    { text: "Where do we go after?", options: ["Late Night Walk", "Daylight Stroll"] },
-    { text: "Would you like to hear a", options: ["Deep Talk", "Pick-Up Line"] }
-];
 
-let answers = {};
-let currentQuestionIndex = 0;
+    let surveyQuestions = [
+        { text: "Which language do you prefer:", options: ["Physical Touch", "Words of Affirmation", "Quality Time", "Receiving Gifts", "Acts of Service"] },
+        { text: "Preferred Physical Affection:", options: ["Hugs", "Holding Hands", "Cuddle", "Kiss"] },
+        { text: "If Kiss, Where?", options: ["Lips", "Cheeks", "Forehead"], condition: "Kiss" },
+        { text: "Where should we go?", options: ["Coffee Date", "Picnic Date", "Sunset Date", "Museum Date", "Cinema Date"] },
+        { text: "Where do we go after?", options: ["Late Night Walk", "Daylight Stroll"] },
+        { text: "Would you like to hear a", options: ["Deep Talk", "Pick-Up Line"] }
+        ];
 
-function showNextQuestion(index) {
-    if (index >= surveyQuestions.length) {
+        let answers = {};
+        let currentQuestionIndex = 0;
+
+    function showNextQuestion(index) {
+        if (index >= surveyQuestions.length) {
         // Survey complete—show submit button
         let answerButtons = document.getElementById('answerButtons');
         answerButtons.innerHTML = ""; // Clear previous options
@@ -238,32 +237,32 @@ function showNextQuestion(index) {
         return;
     }
 
-    let questionObj = surveyQuestions[index];
+        let questionObj = surveyQuestions[index];
 
     // Skip conditional question if condition isn't met
-    if (questionObj.condition && answers[2] !== questionObj.condition) {
-        showNextQuestion(index + 1);
-        return;
+        if (questionObj.condition && answers[2] !== questionObj.condition) {
+            showNextQuestion(index + 1);
+            return;
     }
 
-    document.getElementById('valentineScreen').style.display = 'none';
-    document.getElementById('gifContainer').style.display = 'none';
-    document.getElementById('surveyScreens').classList.remove('hidden');
+        document.getElementById('valentineScreen').style.display = 'none';
+        document.getElementById('gifContainer').style.display = 'none';
+        document.getElementById('surveyScreens').classList.remove('hidden');
     
-    document.getElementById('questionText').textContent = questionObj.text;
-    let answerButtons = document.getElementById('answerButtons');
-    answerButtons.innerHTML = "";
+        document.getElementById('questionText').textContent = questionObj.text;
+        let answerButtons = document.getElementById('answerButtons');
+        answerButtons.innerHTML = "";
 
-    questionObj.options.forEach(option => {
-        let button = document.createElement("button");
-        button.textContent = option;
-        button.onclick = () => {
-            answers[index] = option;
-            showNextQuestion(index + 1);
-        };
-        answerButtons.appendChild(button);
-    });
-}
+        questionObj.options.forEach(option => {
+            let button = document.createElement("button");
+            button.textContent = option;
+            button.onclick = () => {
+                answers[index] = option;
+                showNextQuestion(index + 1);
+                };
+                answerButtons.appendChild(button);
+                });
+    }
 
         function showGifs() {
             document.getElementById('gifContainer').style.display = 'block';
