@@ -29,6 +29,7 @@ body::before {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    text-align: center;
 }
 
 h1 {
@@ -42,9 +43,7 @@ h1 {
 
 .hidden {
     display: none;
-}
-.survey-container {
-    text-align: center;
+    
 }
 button {
     padding: 10px;
