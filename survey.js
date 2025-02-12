@@ -139,10 +139,12 @@ function displayQuestionWithResponse(questionObj, index) {
             button.textContent = option;
             button.onclick = () => {
                 answers[index] = option;
-                answerButtons.innerHTML = ""; // Clear buttons
-                questionText.style.display = 'none'; // Hide the question text after a choice is made
-                showResponseText(option, () => {
-                    showNextQuestion(index + 1); // Proceed to the next question
+                answerButtons.innerHTML = ""; 
+                
+                // Hide the question text only after a choice is selected
+                typeText(responseText, getResponseMessage(option), () => {
+                    questionText.style.display = 'none'; 
+                    showNextQuestion(index + 1);
                 });
             };
             answerButtons.appendChild(button);
