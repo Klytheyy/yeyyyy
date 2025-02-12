@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const dynamicOptionsElement = document.getElementById("dynamic-options");
     const responseElement = document.getElementById("response");
 
-    let selectedOptions = [];
-
     function typeText(element, text, callback) {
         let i = 0;
         element.textContent = "";
@@ -22,14 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
         type();
     }
 
-    // Show love language selection
+    // Show love language selection when text finishes typing
     typeText(questionElement, "What is your love language?", function() {
         optionsElement.classList.remove("hidden");
         nextButton.classList.remove("hidden");
     });
 
     nextButton.addEventListener("click", function() {
-        selectedOptions = Array.from(optionsElement.querySelectorAll("input:checked"))
+        let selectedOptions = Array.from(optionsElement.querySelectorAll("input:checked"))
             .map(input => input.value);
 
         if (selectedOptions.length === 0) {
