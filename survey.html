@@ -11,21 +11,16 @@
         <h1 id="question" class="question-text"></h1>
         
         <!-- Love Language Selection (Checkboxes) -->
-        <div id="options" class="options-container hidden">
-            <label><input type="checkbox" value="Physical Touch"> Physical Touch</label>
-            <label><input type="checkbox" value="Quality Time"> Quality Time</label>
-            <label><input type="checkbox" value="Receiving Gifts"> Receiving Gifts</label>
-            <label><input type="checkbox" value="Words of Affirmation"> Words of Affirmation</label>
-            <label><input type="checkbox" value="Acts of Service"> Acts of Service</label>
-        </div>
-
-        <button id="nextBtn" class="next-btn hidden">Next</button>
-
-        <!-- Container for dynamically generated choices -->
-        <div id="dynamic-options" class="options-container hidden"></div>
-
-        <!-- Display response after selection -->
-        <p id="response" class="response-text"></p>
+        <div id="options">
+    <label><input type="checkbox" value="Physical Touch"> Physical Touch</label><br>
+    <label><input type="checkbox" value="Quality Time"> Quality Time</label><br>
+    <label><input type="checkbox" value="Receiving Gifts"> Receiving Gifts</label><br>
+    <label><input type="checkbox" value="Words of Affirmation"> Words of Affirmation</label><br>
+    <label><input type="checkbox" value="Acts of Service"> Acts of Service</label><br>
+</div>
+<button id="nextBtn" class="hidden">Next</button>
+<div id="dynamic-options" class="hidden"></div>
+<div id="response"></div>
     </div>
 
     <script src="survey_script.js"></script>
