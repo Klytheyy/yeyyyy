@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey lang po opo</title>
-    <link rel="stylesheet" href="survey.css">
+    <title>Survey lang po hehe loveu</title>
+    <link rel="stylesheet" href="survey_styles.css">
 </head>
 <body>
     <div class="container">
-        <div id="dialogue-box">
-            <p id="question-text"></p>
+        <h1 class="dialogue" id="question">What is your love language?</h1>
+        <div id="options" class="options hidden">
+            <label><input type="checkbox" value="Physical Touch"> Physical Touch</label>
+            <label><input type="checkbox" value="Quality Time"> Quality Time</label>
+            <label><input type="checkbox" value="Receiving Gifts"> Receiving Gifts</label>
+            <label><input type="checkbox" value="Words of Affirmation"> Words of Affirmation</label>
+            <label><input type="checkbox" value="Acts of Service"> Acts of Service</label>
         </div>
-        <div id="choices-container"></div>
+        <button id="nextBtn" class="hidden" onclick="processSelection()">Next</button>
+        <div id="response" class="dialogue hidden"></div>
     </div>
-    <script src="survey.js"></script>
+    <script src="survey_script.js"></script>
 </body>
 </html>
