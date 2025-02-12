@@ -39,10 +39,6 @@ function showNextQuestion(index) {
     if (index >= surveyQuestions.length) {
         document.getElementById('surveyScreens').style.display = 'none';
         document.getElementById('gifContainer').classList.remove('hidden');
-        return;function showNextQuestion(index) {
-    if (index >= surveyQuestions.length) {
-        document.getElementById('surveyScreens').style.display = 'none';
-        document.getElementById('gifContainer').classList.remove('hidden');
         return;
     }
 
