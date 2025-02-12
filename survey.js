@@ -140,8 +140,21 @@ function displayQuestionWithResponse(questionObj, index) {
             button.onclick = () => {
                 answers[index] = option;
                 answerButtons.innerHTML = ""; 
-                
-                // Hide the question text only after a choice is selected
+
+                // Check for special cases (Kiss & Pick-Up Line)
+                if (option === "Kiss") {
+                    // Show the "If Kiss, Where?" question immediately
+                    showNextQuestion(surveyQuestions.findIndex(q => q.text === "If Kiss, Where?"));
+                    return;
+                }
+
+                if (option === "Pick-Up Line") {
+                    // Trigger the pick-up line dialogue instead of moving on
+                    showPickupLine();
+                    return;
+                }
+
+                // Regular response flow
                 typeText(responseText, getResponseMessage(option), () => {
                     questionText.style.display = 'none'; 
                     showNextQuestion(index + 1);
