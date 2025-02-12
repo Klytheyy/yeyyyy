@@ -1,4 +1,3 @@
-console.log("Survey script loaded!");
 let surveyQuestions = [
     { 
         text: "Which love language do you prefer?", 
