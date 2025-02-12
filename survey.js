@@ -134,28 +134,26 @@ questionObj.options.forEach(option => {
     let button = document.createElement("button");
     button.textContent = option;
     button.onclick = () => {
-        answers[index] = option;
-        answerButtons.innerHTML = ""; 
+    // Special cases should happen first
+    if (option === "Kiss") {
+        showNextQuestion(surveyQuestions.findIndex(q => q.text === "If Kiss, Where?"));
+        return;  // Do NOT save the answer yet
+    }
 
-        // Check for special cases (Kiss & Pick-Up Line)
-        if (option === "Kiss") {
-            showNextQuestion(surveyQuestions.findIndex(q => q.text === "If Kiss, Where?"));
-            return;
-        }
+    if (option === "Pick-Up Line") {
+        showPickupLine();
+        return;  // Do NOT save the answer yet
+    }
 
-        if (option === "Pick-Up Line") {
-            showPickupLine();
-            return;
-        }
+    // Regular response flow
+    answers[index] = option;  // <-- Save the answer ONLY for normal cases
+    answerButtons.innerHTML = ""; 
 
-        typeText(responseText, getResponseMessage(option), () => {
-            questionText.style.display = 'none'; 
-            showNextQuestion(index + 1);
-        });
-    };
-    answerButtons.appendChild(button);
-});
-    };
+    typeText(responseText, showResponseText(option, () => {
+        questionText.style.display = 'none'; 
+        showNextQuestion(index + 1);
+    });
+};
 
 function showResponseText(option, callback) {
     let responseText = document.getElementById('responseText');
