@@ -152,7 +152,7 @@ questionObj.options.forEach(option => {
     typeText(responseText, showResponseText(option, () => {
         questionText.style.display = 'none'; 
         showNextQuestion(index + 1);
-    });
+    }));
 };
 
 function showResponseText(option, callback) {
