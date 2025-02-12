@@ -70,6 +70,7 @@ function showMultipleChoiceQuestion(questionObj, index) {
     let answerButtons = document.getElementById('answerButtons');
     answerButtons.innerHTML = "";
 
+    questionText.textContent = questionObj.text;
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
             let optionId = option.replace(/\s+/g, "-").toLowerCase();
