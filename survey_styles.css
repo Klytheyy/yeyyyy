@@ -76,6 +76,9 @@ button:hover {
 #questionText {
     font-size: 1.5em;
     margin-bottom: 15px;
+    text-align: center; /* Ensures text stays centered */
+    white-space: pre-wrap; /* Prevents collapsing spaces and keeps formatting */
+    width: 100%; /* Forces it to take the full width */
 }
 #answerButtons {
     display: flex;
