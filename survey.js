@@ -64,19 +64,16 @@ function showNextQuestion(index) {
 function showMultipleChoiceQuestion(questionObj, index) {
     let questionText = document.getElementById('questionText');
     let answerButtons = document.getElementById('answerButtons');
-    answerButtons.innerHTML = "";
+    answerButtons.innerHTML = ""; // Clear previous buttons
 
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
-            let optionId = option.replace(/\s+/g, "-").toLowerCase();
-
             let label = document.createElement("label");
-            label.setAttribute("for", optionId);
+            label.classList.add("checkbox-container");
 
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.value = option;
-            checkbox.id = optionId;
             checkbox.onclick = () => toggleSelection(option);
 
             let checkmark = document.createElement("span");
@@ -90,7 +87,7 @@ function showMultipleChoiceQuestion(questionObj, index) {
 
         let submitButton = document.createElement("button");
         submitButton.textContent = "Proceed";
-        submitButton.disabled = true;  // Initially disabled
+        submitButton.disabled = true; // Initially disabled
         submitButton.id = "submitButton";
         submitButton.onclick = () => {
             if (selectedLoveLanguages.length < questionObj.minSelection) {
