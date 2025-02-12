@@ -151,6 +151,7 @@ function displayQuestionWithResponse(questionObj, index) {
                 }
 
                 // Regular response flow
+                let responseMsg = getResponseMessage(option) || "Great choice!";
                 typeText(responseText, getResponseMessage(option), () => {
                     questionText.style.display = 'none'; 
                     showNextQuestion(index + 1);
