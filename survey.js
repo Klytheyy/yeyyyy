@@ -159,7 +159,6 @@ function displayQuestionWithResponse(questionObj, index) {
             answerButtons.appendChild(button);
         });
     };
-}
 
 function showResponseText(option, callback) {
     let responseText = document.getElementById('responseText');
