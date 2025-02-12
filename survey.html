@@ -3,26 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey lang po hehe loveu</title>
-    <link rel="stylesheet" href="survey_styles.css">
+    <title>Valentine's Survey</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1 id="question" class="question-text"></h1>
-        
-        <!-- Love Language Selection (Checkboxes) -->
-        <div id="options">
-    <label><input type="checkbox" value="Physical Touch"> Physical Touch</label><br>
-    <label><input type="checkbox" value="Quality Time"> Quality Time</label><br>
-    <label><input type="checkbox" value="Receiving Gifts"> Receiving Gifts</label><br>
-    <label><input type="checkbox" value="Words of Affirmation"> Words of Affirmation</label><br>
-    <label><input type="checkbox" value="Acts of Service"> Acts of Service</label><br>
-</div>
-<button id="nextBtn" class="hidden">Next</button>
-<div id="dynamic-options" class="hidden"></div>
-<div id="response"></div>
+        <div id="dialogue-box">
+            <p id="question"></p>
+            <div id="options" class="hidden"></div>
+            <button id="nextBtn" class="hidden">Proceed</button>
+        </div>
+        <p id="response" class="hidden"></p>
     </div>
-
-    <script src="survey_script.js"></script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
