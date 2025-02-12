@@ -129,36 +129,32 @@ function displayQuestionWithResponse(questionObj, index) {
     answerButtons.innerHTML = "";
     responseText.innerHTML = "";
 
-    questionText.textContent = questionObj.text; // Instantly set the text
-        questionObj.options.forEach(option => {
-            let button = document.createElement("button");
-            button.textContent = option;
-            button.onclick = () => {
-                answers[index] = option;
-                answerButtons.innerHTML = ""; 
+   questionText.textContent = questionObj.text; // Instantly set the text
+questionObj.options.forEach(option => {
+    let button = document.createElement("button");
+    button.textContent = option;
+    button.onclick = () => {
+        answers[index] = option;
+        answerButtons.innerHTML = ""; 
 
-                // Check for special cases (Kiss & Pick-Up Line)
-                if (option === "Kiss") {
-                    // Show the "If Kiss, Where?" question immediately
-                    showNextQuestion(surveyQuestions.findIndex(q => q.text === "If Kiss, Where?"));
-                    return;
-                }
+        // Check for special cases (Kiss & Pick-Up Line)
+        if (option === "Kiss") {
+            showNextQuestion(surveyQuestions.findIndex(q => q.text === "If Kiss, Where?"));
+            return;
+        }
 
-                if (option === "Pick-Up Line") {
-                    // Trigger the pick-up line dialogue instead of moving on
-                    showPickupLine();
-                    return;
-                }
+        if (option === "Pick-Up Line") {
+            showPickupLine();
+            return;
+        }
 
-                // Regular response flow
-                let responseMsg = getResponseMessage(option) || "Great choice!";
-                typeText(responseText, getResponseMessage(option), () => {
-                    questionText.style.display = 'none'; 
-                    showNextQuestion(index + 1);
-                });
-            };
-            answerButtons.appendChild(button);
+        typeText(responseText, getResponseMessage(option), () => {
+            questionText.style.display = 'none'; 
+            showNextQuestion(index + 1);
         });
+    };
+    answerButtons.appendChild(button);
+});
     };
 
 function showResponseText(option, callback) {
