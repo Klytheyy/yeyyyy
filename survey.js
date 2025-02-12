@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const questionElement = document.getElementById("question");
     const optionsElement = document.getElementById("options");
     const nextButton = document.getElementById("nextBtn");
-    const dynamicOptionsElement = document.getElementById("dynamic-options");
     const responseElement = document.getElementById("response");
-
+    let selectedOptions = [];
+    
     function typeText(element, text, callback) {
         let i = 0;
         element.textContent = "";
@@ -20,57 +20,64 @@ document.addEventListener("DOMContentLoaded", function() {
         type();
     }
 
-    // Show love language selection when text finishes typing
     typeText(questionElement, "What is your love language?", function() {
-        optionsElement.classList.remove("hidden");
+        displayCheckboxOptions(["Physical Touch", "Quality Time", "Receiving Gifts", "Words of Affirmation", "Acts of Service"]);
         nextButton.classList.remove("hidden");
     });
-
+    
     nextButton.addEventListener("click", function() {
-        let selectedOptions = Array.from(optionsElement.querySelectorAll("input:checked"))
+        selectedOptions = Array.from(optionsElement.querySelectorAll("input:checked"))
             .map(input => input.value);
-
+        
         if (selectedOptions.length === 0) {
             alert("Please select at least one love language.");
             return;
         }
-
-        // Hide initial options and button
+        
         optionsElement.classList.add("hidden");
         nextButton.classList.add("hidden");
-
         processFollowUp(selectedOptions);
     });
-
+    
+    function displayCheckboxOptions(options) {
+        optionsElement.innerHTML = "";
+        options.forEach(option => {
+            const label = document.createElement("label");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = option;
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(option));
+            optionsElement.appendChild(label);
+            optionsElement.appendChild(document.createElement("br"));
+        });
+        optionsElement.classList.remove("hidden");
+    }
+    
     function processFollowUp(choices) {
-        dynamicOptionsElement.innerHTML = ""; // Clear previous options
-        dynamicOptionsElement.classList.add("hidden");
-
         if (choices.includes("Physical Touch")) {
-            typeText(questionElement, "What type of physical affection do you prefer?", function() {
-                displayOptions(["Kiss", "Hug", "Holding Hands", "Cuddle"]);
-            });
+            askQuestion("What type of physical affection do you prefer?", ["Kiss", "Hug", "Holding Hands", "Cuddle"]);
         } else if (choices.includes("Quality Time")) {
-            typeText(questionElement, "What should we do together?", function() {
-                displayOptions(["Daylight stroll", "Late Night Walk"]);
-            });
+            askQuestion("What should we do together?", ["Daylight stroll", "Late Night Walk"]);
         } else if (choices.includes("Receiving Gifts")) {
-            typeText(questionElement, "What would you like to receive?", function() {
-                displayOptions(["Flowers", "Chocolates", "Something else"]);
-            });
+            askQuestion("What would you like to receive?", ["Flowers", "Chocolates", "Something else"]);
         } else if (choices.includes("Words of Affirmation")) {
-            typeText(questionElement, "Would you like to hear a?", function() {
-                displayOptions(["Pickup line", "Deep talk"]);
-            });
+            askQuestion("Would you like to hear a?", ["Pickup line", "Deep talk"]);
         } else if (choices.includes("Acts of Service")) {
-            typeText(questionElement, "How can I show my love through acts of service?", function() {
-                displayOptions(["Let me take care of you", "I'll always be there for you"]);
-            });
+            askQuestion("How can I show my love through acts of service?", ["Let me take care of you", "I'll always be there for you"]);
+        } else {
+            finalizeSurvey();
         }
     }
-
+    
+    function askQuestion(text, options) {
+        typeText(questionElement, text, function() {
+            displayOptions(options);
+        });
+    }
+    
     function displayOptions(options) {
-        dynamicOptionsElement.innerHTML = "";
+        optionsElement.innerHTML = "";
         options.forEach(option => {
             const button = document.createElement("button");
             button.textContent = option;
@@ -78,50 +85,41 @@ document.addEventListener("DOMContentLoaded", function() {
             button.onclick = function() {
                 handleChoice(option);
             };
-            dynamicOptionsElement.appendChild(button);
+            optionsElement.appendChild(button);
         });
-        dynamicOptionsElement.classList.remove("hidden");
+        optionsElement.classList.remove("hidden");
     }
-
+    
     function handleChoice(choice) {
-        dynamicOptionsElement.classList.add("hidden");
+        optionsElement.classList.add("hidden");
         let responseText = "";
-
+        
         const responses = {
             "Hug": "I'd love a warm hug from you! 💖",
             "Holding Hands": "Your hands in mine? Perfect pookie. 🤝",
             "Cuddle": "Cuddling up close sounds like a dream. ☁️💞",
-            "Deep talk": "Love starts as a feeling but continues as a choice. I find myself choosing you every day. 💕",
+            "Deep Talk": "Love starts as a feeling but continues as a choice. I find myself choosing you every day. 💕",
             "Late Night Walk": "The world asleep, just us and the stars and our ruined sleep schedule so suwit ugh 🌙✨",
-            "Daylight stroll": "Syarog dili hangakon love xD 🌞💛",
+            "Daylight Stroll": "Syarog dili hangakon love xD 🌞💛",
             "Flowers": "Flowers for you, my love, always. 🌸💐",
             "Chocolates": "Sweet chocolates for my sweetest one. 🍫💕",
             "Something else": "Oh? I love surprises (starts with S). 🎁😉",
             "Let me take care of you": "You're my priority, always. ❤️",
-            "I'll always be there for you": "Through ups and downs, I'll stand by you. 💪💕"
+            "I'll always be there for you": "Through ups and downs, I'll stand by you. 💪💕",
         };
-
+        
         if (choice === "Kiss") {
-            typeText(questionElement, "If kiss, where?", function() {
-                displayOptions(["Lips", "Cheeks", "Forehead"]);
-            });
+            askQuestion("If kiss, where?", ["Lips", "Cheeks", "Forehead"]);
             return;
-        }
-
-        if (choice === "Pickup line") {
-            typeText(questionElement, "Ketchup kaba?", function() {
-                displayOptions(["Why", "Bakit", "Por que", "Hindi"]);
-            });
+        } else if (choice === "Pickup line") {
+            askQuestion("Ketchup kaba?", ["Why", "Bakit", "Por que", "Hindi"]);
             return;
-        }
-
-        if (["Lips", "Cheeks", "Forehead"].includes(choice)) {
-            const kissResponses = {
-                "Lips": "A kiss on the lips? wow kissable yarn 😏",
-                "Cheeks": "Cheek kisses are sweet, just like you. 😊",
-                "Forehead": "Forehead kisses show real love and care. 💖"
-            };
-            responseText = kissResponses[choice];
+        } else if (choice === "Lips") {
+            responseText = "A kiss on the lips? wow kissable yarn 😏";
+        } else if (choice === "Cheeks") {
+            responseText = "Cheek kisses are sweet, just like you. 😊";
+        } else if (choice === "Forehead") {
+            responseText = "Forehead kisses show real love and care. 💖";
         } else if (["Why", "Bakit", "Por que"].includes(choice)) {
             responseText = "Kasi bagay ka sa hotdog ko 😉";
         } else if (choice === "Hindi") {
@@ -129,13 +127,13 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             responseText = responses[choice] || "Great choice!";
         }
-
+        
         typeText(responseElement, responseText, function() {
-            setTimeout(() => {
-                typeText(questionElement, "Where should we go for our date?", function() {
-                    displayOptions(["Coffee Date", "Picnic Date", "Sunset Date", "Museum Date", "Cinema Date"]);
-                });
-            }, 1000);
+            setTimeout(finalizeSurvey, 1000);
         });
+    }
+    
+    function finalizeSurvey() {
+        askQuestion("Where should we go for our date?", ["Coffee Date", "Picnic Date", "Sunset Date", "Museum Date", "Cinema Date"]);
     }
 });
