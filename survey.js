@@ -36,6 +36,7 @@ function typeText(element, text, callback) {
 }
 
 function showNextQuestion(index) {
+    console.log("showNextQuestion is running for index:", index);
     if (index >= surveyQuestions.length) {
         document.getElementById('surveyScreens').style.display = 'none';
         document.getElementById('gifContainer').classList.remove('hidden');
@@ -70,6 +71,7 @@ function showMultipleChoiceQuestion(questionObj, index) {
     let answerButtons = document.getElementById('answerButtons');
     answerButtons.innerHTML = "";
 
+    console.log("Setting question text:", questionObj.text);
     questionText.textContent = questionObj.text;
     typeText(questionText, questionObj.text, () => {
         questionObj.options.forEach(option => {
