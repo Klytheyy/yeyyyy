@@ -134,7 +134,7 @@ function displayQuestionWithResponse(questionObj, index) {
     answerButtons.innerHTML = "";
     responseText.innerHTML = "";
 
-    typeText(questionText, questionObj.text, () => {
+    questionText.textContent = questionObj.text; // Instantly set the text
         questionObj.options.forEach(option => {
             let button = document.createElement("button");
             button.textContent = option;
