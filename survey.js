@@ -39,10 +39,18 @@ function showNextQuestion(index) {
     if (index >= surveyQuestions.length) {
         document.getElementById('surveyScreens').style.display = 'none';
         document.getElementById('gifContainer').classList.remove('hidden');
+        return;function showNextQuestion(index) {
+    if (index >= surveyQuestions.length) {
+        document.getElementById('surveyScreens').style.display = 'none';
+        document.getElementById('gifContainer').classList.remove('hidden');
         return;
     }
 
     let questionObj = surveyQuestions[index];
+
+    // Reset visibility of the question text to ensure it appears
+    let questionText = document.getElementById('questionText');
+    questionText.style.display = 'block'; // Make sure it appears for new questions
 
     if (index === 0) {
         showMultipleChoiceQuestion(questionObj, index);
